@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdftotext /Users/ethanhanks/School/Spring26/webdev/developer-dashboard-project-documentation.pdf -)",
+      "Bash(python3 -c ':*)",
+      "Bash(pip3 install:*)",
+      "Bash(pnpm create:*)"
+    ]
+  }
+}
