@@ -24,7 +24,8 @@
       "Bash(node --env-file=/Users/ethanhanks/School/Spring26/webdev/prism/.env.local -e ':*)",
       "Bash(tsx --env-file=.env.local -e ':*)",
       "Bash(PRISMA_HIDE_UPDATE_MESSAGE=1 yes)",
-      "Bash(pkill -f \"worker/index.ts\")"
+      "Bash(pkill -f \"worker/index.ts\")",
+      "Bash(pnpm build:*)"
     ]
   }
 }

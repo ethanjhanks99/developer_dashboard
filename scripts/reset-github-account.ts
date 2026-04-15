@@ -1,4 +1,4 @@
-import { PrismaClient } from "../app/generated/prisma/client.ts";
+import { PrismaClient } from "../app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 async function main(): Promise<void> {

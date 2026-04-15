@@ -6,10 +6,6 @@ import { runScheduler } from "./jobs/scheduler";
 
 const connection = { url: env.REDIS_URL };
 
-const RETRY_CONFIG = {
-  attempts: 3,
-  backoff: { type: "exponential" as const, delay: 5000 },
-};
 
 const syncWorker = new Worker(
   "sync-queue",
@@ -21,14 +17,7 @@ const syncWorker = new Worker(
       throw err;
     }
   },
-  {
-    connection,
-    defaultJobOptions: {
-      ...RETRY_CONFIG,
-      removeOnComplete: 100,
-      removeOnFail: 500,
-    },
-  }
+  { connection }
 );
 
 const digestWorker = new Worker(
@@ -41,14 +30,7 @@ const digestWorker = new Worker(
       throw err;
     }
   },
-  {
-    connection,
-    defaultJobOptions: {
-      ...RETRY_CONFIG,
-      removeOnComplete: 100,
-      removeOnFail: 500,
-    },
-  }
+  { connection }
 );
 
 // Daily cron scheduler — 6:00 AM
