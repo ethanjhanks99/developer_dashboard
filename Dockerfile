@@ -16,4 +16,4 @@ COPY . .
 ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder"
 RUN pnpm prisma generate
 
-CMD ["node", "--import", "tsx/esm", "worker/index.ts"]
+CMD ["node_modules/.bin/tsx", "worker/index.ts"]
