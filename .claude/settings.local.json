@@ -4,7 +4,27 @@
       "Bash(pdftotext /Users/ethanhanks/School/Spring26/webdev/developer-dashboard-project-documentation.pdf -)",
       "Bash(python3 -c ':*)",
       "Bash(pip3 install:*)",
-      "Bash(pnpm create:*)"
+      "Bash(pnpm create:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm approve-builds:*)",
+      "Bash(pnpm exec:*)",
+      "Bash(pnpm test:*)",
+      "Bash(node -e \"const t = require\\('js-tiktoken'\\); console.log\\(Object.keys\\(t\\)\\)\")",
+      "Bash(node -e \"const {getEncoding} = require\\('js-tiktoken'\\); const enc = getEncoding\\('cl100k_base'\\); console.log\\(Object.getOwnPropertyNames\\(Object.getPrototypeOf\\(enc\\)\\)\\)\")",
+      "Bash(openssl rand:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(curl -s http://localhost:3000/api/auth/error)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/login)",
+      "Bash(pnpm worker:*)",
+      "Read(//tmp/**)",
+      "Bash(jobs)",
+      "Bash(curl -s -X POST http://localhost:3000/api/sync)",
+      "Bash(jobs -l)",
+      "Bash(node --env-file=/Users/ethanhanks/School/Spring26/webdev/prism/.env.local -e ':*)",
+      "Bash(tsx --env-file=.env.local -e ':*)",
+      "Bash(PRISMA_HIDE_UPDATE_MESSAGE=1 yes)",
+      "Bash(pkill -f \"worker/index.ts\")"
     ]
   }
 }
