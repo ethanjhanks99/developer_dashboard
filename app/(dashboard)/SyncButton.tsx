@@ -9,12 +9,13 @@ export function SyncButton(): React.JSX.Element {
 
   async function handleSync(): Promise<void> {
     setSyncing(true);
+    const syncStarted = new Date().toISOString();
     try {
       await fetch("/api/sync", { method: "POST" });
-      // Poll until digest appears (up to 30s)
-      for (let i = 0; i < 15; i++) {
+      // Poll until a digest newer than when we started appears (up to 60s)
+      for (let i = 0; i < 30; i++) {
         await new Promise((r) => setTimeout(r, 2000));
-        const res = await fetch("/api/digest");
+        const res = await fetch(`/api/digest?since=${encodeURIComponent(syncStarted)}`);
         if (res.ok) break;
       }
       router.refresh();

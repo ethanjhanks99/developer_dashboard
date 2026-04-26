@@ -14,6 +14,9 @@ export default async function SettingsPage(): Promise<React.JSX.Element> {
   const isConnected = (provider: string): boolean =>
     connectedAccounts.some((a) => a.provider === provider && !a.needsReauth);
 
+  const needsReauth = (provider: string): boolean =>
+    connectedAccounts.some((a) => a.provider === provider && a.needsReauth);
+
   return (
     <main className="min-h-screen bg-gray-950 text-white p-8">
       <div className="max-w-2xl mx-auto space-y-8">
@@ -38,12 +41,14 @@ export default async function SettingsPage(): Promise<React.JSX.Element> {
               name="Google Calendar"
               description="Fetch today's events for your digest"
               connected={isConnected("google")}
+              needsReauth={needsReauth("google")}
               connectHref="/api/oauth/google"
             />
             <ServiceRow
               name="Todoist"
               description="Fetch tasks due today and overdue items"
               connected={isConnected("todoist")}
+              needsReauth={needsReauth("todoist")}
               connectHref="/api/oauth/todoist"
             />
           </div>
@@ -83,12 +88,14 @@ function ServiceRow({
   description,
   connected,
   readOnly,
+  needsReauth,
   connectHref,
 }: {
   name: string;
   description: string;
   connected: boolean;
   readOnly?: boolean;
+  needsReauth?: boolean;
   connectHref?: string;
 }): React.JSX.Element {
   return (
@@ -96,6 +103,9 @@ function ServiceRow({
       <div>
         <p className="font-medium text-sm">{name}</p>
         <p className="text-xs text-gray-500 mt-0.5">{description}</p>
+        {needsReauth && (
+          <p className="text-xs text-yellow-500 mt-0.5">⚠ Token expired — reconnect to restore access</p>
+        )}
       </div>
       {readOnly ? (
         <span className="text-xs px-2 py-1 rounded-full bg-green-900/40 text-green-400 font-medium">
@@ -110,7 +120,7 @@ function ServiceRow({
           href={connectHref}
           className="text-xs px-3 py-1.5 rounded-md bg-indigo-600 hover:bg-indigo-500 transition-colors font-medium"
         >
-          Connect
+          {needsReauth ? "Reconnect" : "Connect"}
         </a>
       )}
     </div>

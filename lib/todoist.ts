@@ -1,4 +1,4 @@
-const TODOIST_API = "https://api.todoist.com/rest/v2";
+const TODOIST_API = "https://api.todoist.com/api/v1";
 
 const PRIORITY_MAP: Record<number, string> = {
   1: "normal",

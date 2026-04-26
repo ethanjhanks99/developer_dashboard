@@ -65,10 +65,11 @@ export async function fetchGitHubEvents(
     if (event.type === "PushEvent") {
       if (event.payload.commits && event.payload.commits.length > 0) {
         for (const commit of event.payload.commits) {
+          const msg = commit.message ?? "";
           results.push({
             type: "commit",
             repo: event.repo.name,
-            title: commit.message.split("\n")[0].slice(0, 200),
+            title: (msg.split("\n")[0] || commit.sha?.slice(0, 7) || "commit").slice(0, 200),
             sha: commit.sha,
             eventAt: new Date(event.created_at),
           });
