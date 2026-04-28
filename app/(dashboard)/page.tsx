@@ -14,7 +14,7 @@ export default async function DashboardPage(): Promise<React.JSX.Element> {
   const now = new Date();
   const startOfDay = new Date(now);
   startOfDay.setHours(0, 0, 0, 0);
-  const since24h = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000); // last 7 days
+  const since24h = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000); // last 30 days
   const endOfDay = new Date(now);
   endOfDay.setHours(23, 59, 59, 999);
 
@@ -80,7 +80,7 @@ export default async function DashboardPage(): Promise<React.JSX.Element> {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* GitHub */}
           <section className="bg-gray-900 rounded-xl p-5 space-y-3">
-            <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">GitHub — Last 7 days</h2>
+            <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">GitHub — Recent Activity</h2>
             {githubEvents.length === 0 ? (
               <p className="text-gray-500 text-sm">No activity yet. Sync to fetch.</p>
             ) : (

@@ -12,11 +12,12 @@ export async function generateDigest(job: Job<{ userId: string }>): Promise<void
   const startOfDay = new Date(now);
   startOfDay.setHours(0, 0, 0, 0);
 
-  const since24h = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  const since30d = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
 
   const [githubEvents, calendarEvents, tasks] = await Promise.all([
     prisma.gitHubEvent.findMany({
-      where: { userId, eventAt: { gte: since24h } },
+      where: { userId, eventAt: { gte: since30d } },
+      orderBy: { eventAt: "desc" },
     }),
     prisma.calendarEvent.findMany({
       where: { userId, startTime: { gte: startOfDay } },

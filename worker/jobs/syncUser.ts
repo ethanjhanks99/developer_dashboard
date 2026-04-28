@@ -25,7 +25,7 @@ export async function syncUser(job: Job<{ userId: string }>): Promise<void> {
   let githubEvents: Awaited<ReturnType<typeof fetchGitHubEvents>> = [];
   try {
     if (githubToken && user.githubLogin) {
-      const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // last 7 days
+      const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000); // last 30 days
       githubEvents = await fetchGitHubEvents(githubToken, user.githubLogin, since);
       console.info({ userId, jobId: job.id, msg: `Fetched ${githubEvents.length} GitHub events` });
     } else {

@@ -53,7 +53,9 @@ export function buildDigestContext(
 ): DigestContext {
   const now = params.now ?? new Date();
 
-  // Group GitHub events by repo
+  const EVENTS_PER_REPO = 5;
+
+  // Group GitHub events by repo, sorted newest-first, capped at EVENTS_PER_REPO each
   const byRepo = new Map<string, { type: string; title: string; at: string }[]>();
   for (const e of params.githubEvents) {
     const existing = byRepo.get(e.repo) ?? [];
@@ -61,9 +63,13 @@ export function buildDigestContext(
     byRepo.set(e.repo, existing);
   }
 
-  const githubRaw = Array.from(byRepo.entries()).map(([repo, events]) => ({ repo, events }));
+  const githubRaw = Array.from(byRepo.entries()).map(([repo, events]) => ({
+    repo,
+    // Already ordered newest-first from the DB query; cap per repo
+    events: events.slice(0, EVENTS_PER_REPO),
+  }));
 
-  // Truncate GitHub to budget
+  // Still apply token budget as a safety net
   const github = truncateToTokenBudget(
     githubRaw,
     TOKEN_BUDGETS.github,

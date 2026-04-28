@@ -25,7 +25,9 @@
       "Bash(tsx --env-file=.env.local -e ':*)",
       "Bash(PRISMA_HIDE_UPDATE_MESSAGE=1 yes)",
       "Bash(pkill -f \"worker/index.ts\")",
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")"
     ]
   }
 }
